@@ -1,0 +1,30 @@
+name: Book the court
+on: workflow_dispatch
+jobs:
+  run-court-booker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Instal Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run court booking script
+        env:
+          APPLICATION_URL: ${{ secrets.APPLICATION_URL }}
+          BOOKER_USERNAME: ${{ secrets.BOOKER_USERNAME }}
+          BOOKER_PLAYER_NAME: ${{ secrets.BOOKER_PLAYER_NAME }}
+          BOOKER_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}
+          ACTIVITY_ID: ${{ secrets.ACTIVITY_ID }}
+          BOOKING_TIME_START_HOUR: ${{ secrets.BOOKING_TIME_START_HOUR }}
+          SECOND_PLAYER_NAME: ${{ secrets.SECOND_PLAYER_NAME }}
+        run: node index.js
