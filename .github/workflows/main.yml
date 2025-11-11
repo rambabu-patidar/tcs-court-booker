@@ -21,10 +21,10 @@ jobs:
       - name: Run court booking script
         env:
           APPLICATION_URL: ${{ secrets.APPLICATION_URL }}
-          BOOKER_USERNAME: ${{ secrets.BOOKER_USERNAME }}
-          BOOKER_PLAYER_NAME: ${{ secrets.BOOKER_PLAYER_NAME }}
+          BOOKER_USERNAME: ${{ env.BOOKER_USERNAME }}
+          BOOKER_PLAYER_NAME: ${{ env.BOOKER_PLAYER_NAME }}
           BOOKER_PASSWORD: ${{ secrets.BOOKER_PASSWORD }}
           ACTIVITY_ID: ${{ secrets.ACTIVITY_ID }}
-          BOOKING_TIME_START_HOUR: ${{ secrets.BOOKING_TIME_START_HOUR }}
-          SECOND_PLAYER_NAME: ${{ secrets.SECOND_PLAYER_NAME }}
+          BOOKING_TIME_START_HOUR: ${{ env.BOOKING_TIME_START_HOUR }}
+          SECOND_PLAYER_NAME: ${{ env.SECOND_PLAYER_NAME }}
         run: node index.js

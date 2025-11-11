@@ -18,7 +18,9 @@ const getDateForBooking = async () => {
 		bookingDateWeekDayNumber = dayOfWeek;
 		const bookingDate = new Date(today);
 		bookingDate.setDate(today.getDate() + 7);
-		return bookingDateFormatter(bookingDate);
+		const formattedDate = bookingDateFormatter(bookingDate);
+		console.log(formattedDate);
+		return formattedDate;
 	} else {
 		throw new Error("Bookings are not allowed on Sundays");
 	}
