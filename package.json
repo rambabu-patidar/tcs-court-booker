@@ -1,0 +1,17 @@
+{
+	"name": "tcs-court-booker",
+	"type": "module",
+	"version": "1.0.0",
+	"description": "This is the application used for automatically booking the courts on TCS medifit booking site",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Rambabu Patidar",
+	"license": "MIT",
+	"dependencies": {
+		"dotenv": "^17.2.3",
+		"playwright": "^1.56.1",
+		"tesseract.js": "^6.0.1"
+	}
+}
