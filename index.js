@@ -15,7 +15,7 @@ dotenv.config();
 const APPLICATION_URL = process.env.APPLICATION_URL;
 
 async function bookCourt() {
-	const browser = await chromium.launch({ headless: true, slowMo: 50 });
+	const browser = await chromium.launch({ headless: false, slowMo: 50 });
 	const page = await browser.newPage();
 
 	try {
@@ -26,8 +26,9 @@ async function bookCourt() {
 		await showAppointments(page, bookingDate, bookingDateWeekDayNumber);
 		await chooseTimeSlot(page, bookingDate);
 
-		await pickPlayer(page, process.env.BOOKER_PLAYER_NAME);
-		await pickPlayer(page, process.env.SECOND_PLAYER_NAME);
+		const isBooker = true;
+		await pickPlayer(page, process.env.BOOKER_PLAYER_NAME, isBooker);
+		await pickPlayer(page, process.env.SECOND_PLAYER_NAME, false);
 
 		await saveCatpchaAndBook(page);
 	} catch (error) {
