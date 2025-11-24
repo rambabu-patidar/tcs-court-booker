@@ -21,7 +21,7 @@ const saveCatpchaAndBook = async (page) => {
 	await page.fill("#Captcha", captchaResult.toString());
 
 	// Click on Book button.
-	await page.click("#btnSave");
+	if (!process.env.TESTING) await page.click("#btnSave");
 };
 
 export default saveCatpchaAndBook;

@@ -15,7 +15,10 @@ dotenv.config();
 const APPLICATION_URL = process.env.APPLICATION_URL;
 
 async function bookCourt() {
-	const browser = await chromium.launch({ headless: false, slowMo: 50 });
+	const browser = await chromium.launch({
+		headless: !process.env.SHOW_BROWSER,
+		slowMo: +process.env.SLOW_MO || 50,
+	});
 	const page = await browser.newPage();
 
 	try {
