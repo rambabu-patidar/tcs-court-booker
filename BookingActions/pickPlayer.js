@@ -2,7 +2,7 @@ const pickPlayer = async (page, playerName, isBooker) => {
 	// search player and then pick it.
 	await page.fill(".ui-autocomplete-input", playerName.split(" ")[0]);
 
-	let numberInList = process.env.BOOKER_NUMBER_IN_LIST;
+	let numberInList = process.env.BOOKER_NUMBER_IN_LIST ?? 1;
 	await page.evaluate(
 		(object) => {
 			const playersList = document.querySelectorAll(
@@ -12,7 +12,7 @@ const pickPlayer = async (page, playerName, isBooker) => {
 			for (let playerElement of playersList) {
 				console.log(playerElement.innerText + " " + object.playerName);
 				if (playerElement.innerText.includes(object.playerName)) {
-					if (!object.isBooker || object.numberInList === 1) {
+					if (!object.isBooker || +object.numberInList === 1) {
 						playerElement.click();
 						break;
 					} else object.numberInList = object.numberInList - 1;
@@ -20,7 +20,11 @@ const pickPlayer = async (page, playerName, isBooker) => {
 				}
 			}
 		},
-		{ playerName: playerName, isBooker: isBooker, numberInList: numberInList }
+		{
+			playerName: playerName,
+			isBooker: isBooker,
+			numberInList: numberInList,
+		}
 	);
 
 	await page.click("#btnadd");
